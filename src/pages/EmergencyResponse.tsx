@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AlertTriangle, Phone, MapPin, Clock, Heart, Activity, VolumeX, Volume2 } from 'lucide-react';
 import { useVoice } from '../context/VoiceContext';
 import AnimatedMicrophone from '../components/ui/AnimatedMicrophone';
+import VoiceInputBox from '../components/VoiceInputBox'; // Import VoiceInputBox here
 
 const EmergencyResponse = () => {
   const { speak, isListening, startListening, stopListening, transcript } = useVoice();
@@ -179,7 +180,7 @@ const EmergencyResponse = () => {
                 </p>
               </div>
               
-              <div className="bg-white p-4 rounded-lg border border-gray-200 min-h-20">
+              <div className="bg-white p-4 rounded-lg border border-gray-200 min-h-20 mb-6">
                 {transcript ? (
                   <p className="text-gray-800">{transcript}</p>
                 ) : (
@@ -188,6 +189,9 @@ const EmergencyResponse = () => {
                   </p>
                 )}
               </div>
+
+              {/* Add VoiceInputBox here for manual text input */}
+              <VoiceInputBox />
             </div>
 
             {/* Location Information */}

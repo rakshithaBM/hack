@@ -33,7 +33,7 @@ const AppointmentBooking = () => {
   const doctors: Doctor[] = [
     {
       id: 1,
-      name: 'Dr. Sarah Johnson',
+      name: 'Dr. Sarah ',
       specialty: 'General Practitioner',
       rating: 4.8,
       image: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
@@ -41,7 +41,7 @@ const AppointmentBooking = () => {
     },
     {
       id: 2,
-      name: 'Dr. Michael Chen',
+      name: 'Dr. Michael',
       specialty: 'Cardiologist',
       rating: 4.9,
       image: 'https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300',
@@ -49,7 +49,7 @@ const AppointmentBooking = () => {
     },
     {
       id: 3,
-      name: 'Dr. Emily Rodriguez',
+      name: 'Dr. Emily',
       specialty: 'Pediatrician',
       rating: 4.7,
       image: 'https://images.pexels.com/photos/5214949/pexels-photo-5214949.jpeg?auto=compress&cs=tinysrgb&w=300',

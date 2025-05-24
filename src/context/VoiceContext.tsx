@@ -7,7 +7,7 @@ interface VoiceContextType {
   stopListening: () => void;
   speak: (text: string) => void;
   isSpeaking: boolean;
-  clearTranscript: () => void;
+  resetTranscript: () => void;
   language: string;
   setLanguage: (lang: string) => void;
 }
@@ -31,48 +31,44 @@ export const VoiceProvider: React.FC<VoiceProviderProps> = ({ children }) => {
   const [transcript, setTranscript] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [language, setLanguage] = useState('en-US');
-  
+
   // Mock SpeechRecognition since it's not available in all browsers
   const startListening = () => {
     setIsListening(true);
-    // In a real implementation, you would connect to the Web Speech API
     console.log('Started listening...');
-    
-    // Simulate receiving transcripts over time
+
+    // Simulate receiving transcripts over time (you can replace this with real speech recognition)
     const mockTimeout = setTimeout(() => {
-      setTranscript(prev => prev + ' I need to schedule an appointment');
+      setTranscript((prev) => prev + ' I need help urgently');
       setIsListening(false);
     }, 3000);
-    
+
     return () => clearTimeout(mockTimeout);
   };
-  
+
   const stopListening = () => {
     setIsListening(false);
     console.log('Stopped listening');
   };
-  
-  const clearTranscript = () => {
+
+  const resetTranscript = () => {
     setTranscript('');
   };
-  
+
   const speak = (text: string) => {
     setIsSpeaking(true);
-    
-    // Use the Web Speech API if available
+
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = language;
       utterance.onend = () => setIsSpeaking(false);
       window.speechSynthesis.speak(utterance);
     } else {
-      // Fallback for browsers without speech synthesis
       console.log(`Speaking: ${text}`);
       setTimeout(() => setIsSpeaking(false), 2000);
     }
   };
-  
-  // Clean up speech synthesis on unmount
+
   useEffect(() => {
     return () => {
       if ('speechSynthesis' in window) {
@@ -80,7 +76,7 @@ export const VoiceProvider: React.FC<VoiceProviderProps> = ({ children }) => {
       }
     };
   }, []);
-  
+
   return (
     <VoiceContext.Provider
       value={{
@@ -90,9 +86,9 @@ export const VoiceProvider: React.FC<VoiceProviderProps> = ({ children }) => {
         stopListening,
         speak,
         isSpeaking,
-        clearTranscript,
+        resetTranscript,
         language,
-        setLanguage
+        setLanguage,
       }}
     >
       {children}
